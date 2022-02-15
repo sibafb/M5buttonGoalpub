@@ -2,7 +2,7 @@
 #include <ros.h>
 #include <std_msgs/Bool.h>
 
-const int BUTTUN_PIN = 30;
+const int BUTTUN_PIN = 21;
 
 std_msgs::Bool buttton_pushed_msg;
 ros::Publisher pub_bottun_pushed("buttun_pushed", &buttton_pushed_msg);
