@@ -2,11 +2,11 @@
 #include <ros.h>
 #include <std_msgs/Bool.h>
 
-const int BUTTUN_PIN = 30;
+const int BUTTUN_PIN = 21;
 
-const char SSID[] = "＜ここにWiFiルータのSSIDを書く＞";
-const char PASSWORD[] = "＜ここにWiFiルータのパスワードを書く＞";
-IPAddress server(＜ここにWindowsのIPアドレスを書く＞);
+const char SSID[] = "TP-Link_FC5F_2.4G";
+const char PASSWORD[] = "05492952860";
+IPAddress server(192,168,0,5);
 const uint16_t serverPort = 11411;
 
 WiFiClient client;
@@ -33,22 +33,30 @@ class WiFiHardware {
   }
 };
 
+ros::NodeHandle_<WiFiHardware> nh;
 std_msgs::Bool buttton_pushed_msg;
 ros::Publisher pub_bottun_pushed("buttun_pushed", &buttton_pushed_msg);
-ros::NodeHandle_<WiFiHardware> nh;
 
 void setup() {
   Serial.begin(115200);
-  WiFi.begin(SSID,PASSWORD);
-    Serial.print("WiFi connecting");
 
+  M5.begin();
+  M5.Lcd.setCursor(10, 10); //文字表示の左上位置を設定
+  M5.Lcd.setTextColor(RED); //文字色設定(背景は透明)(WHITE, BLACK, RED, GREEN, BLUE, YELLOW...)
+  M5.Lcd.setTextSize(2);//文字の大きさを設定（1～7）
+  M5.Lcd.print("Start");
+
+  WiFi.begin(SSID,PASSWORD);
+  Serial.print("WiFi connecting");
+  M5.Lcd.print("WiFi connecting");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
+    M5.Lcd.print(".");
     delay(100);
   }
 
   Serial.println(" connected");
-
+  M5.Lcd.print(" connected");
   pinMode(BUTTUN_PIN, INPUT);
 
   nh.initNode();
@@ -61,13 +69,28 @@ void setup() {
 void loop() {
 
   if( digitalRead(BUTTUN_PIN) == HIGH ){
+    if(buttton_pushed_msg.data == false){
+      M5.Lcd.print(" pushed");
+    }
     buttton_pushed_msg.data = true;
+    
   }
   else{
+    if(buttton_pushed_msg.data == true){
+      M5.Lcd.print(" released");
+    }
     buttton_pushed_msg.data = false;
+  }
+
+  M5.update();
+  if( M5.BtnA.isPressed()||M5.BtnB.isPressed()||M5.BtnC.isPressed()){
+    M5.Lcd.print("button pressed");
+    delay(300);
+    M5.Lcd.clear(BLACK);
+    M5.Lcd.setCursor(10, 10); 
   }
 
   pub_bottun_pushed.publish(&buttton_pushed_msg);
   nh.spinOnce();
-  delay(30); //ms
+  delay(50); //ms
 }
