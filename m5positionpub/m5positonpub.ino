@@ -9,6 +9,8 @@ const char PASSWORD[] = "05492952860";
 IPAddress server(192,168,0,5);
 const uint16_t serverPort = 11411;
 
+IPAddress ip(192, 168, 0, 10);
+
 WiFiClient client;
 
 class WiFiHardware {
