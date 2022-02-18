@@ -12,7 +12,7 @@ ros::NodeHandle nh;
 
 void setup() {
   pinMode(BUTTUN_PIN, INPUT);
-
+  nh.getHardware()->setBaud(115200);
   nh.initNode();
   nh.advertise(pub_bottun_pushed);
 
