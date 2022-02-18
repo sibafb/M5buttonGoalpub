@@ -1,5 +1,7 @@
 #include <M5Stack.h>
+#undef ESP32
 #include <ros.h>
+#define ESP32 
 #include <std_msgs/Bool.h>
 
 const int BUTTUN_PIN = 21;
