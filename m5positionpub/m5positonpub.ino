@@ -43,9 +43,9 @@ void setup() {
   Serial.begin(115200);
 
   M5.begin();
-  M5.Lcd.setCursor(10, 10); //文字表示の左上位置を設定
-  M5.Lcd.setTextColor(RED); //文字色設定(背景は透明)(WHITE, BLACK, RED, GREEN, BLUE, YELLOW...)
-  M5.Lcd.setTextSize(2);//文字の大きさを設定（1～7）
+  M5.Lcd.setCursor(10, 10);   //文字表示の左上位置を設定
+  M5.Lcd.setTextColor(RED);   //文字色設定(背景は透明)(WHITE, BLACK, RED, GREEN, BLUE, YELLOW...)
+  M5.Lcd.setTextSize(2);      //文字の大きさを設定（1～7）
   M5.Lcd.print("Start");
 
   WiFi.begin(SSID,PASSWORD);
