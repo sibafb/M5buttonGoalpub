@@ -1,6 +1,7 @@
 #include <M5Stack.h>
 #include <ros.h>
 #include <std_msgs/Bool.h>
+#include <WiFi.h>
 
 const int BUTTUN_PIN = 21;
 
