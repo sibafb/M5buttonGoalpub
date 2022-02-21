@@ -74,6 +74,7 @@ void loop() {
   if( digitalRead(BUTTUN_PIN) == HIGH ){
     if(buttton_pushed_msg.data == false){
       M5.Lcd.print(" pushed");
+      pub_bottun_pushed.publish(&buttton_pushed_msg);
     }
     buttton_pushed_msg.data = true;
     
@@ -81,6 +82,7 @@ void loop() {
   else{
     if(buttton_pushed_msg.data == true){
       M5.Lcd.print(" released");
+      pub_bottun_pushed.publish(&buttton_pushed_msg);
     }
     buttton_pushed_msg.data = false;
   }
@@ -93,7 +95,7 @@ void loop() {
     M5.Lcd.setCursor(10, 10); 
   }
 
-  pub_bottun_pushed.publish(&buttton_pushed_msg);
+  
   nh.spinOnce();
   delay(50); //ms
 }
