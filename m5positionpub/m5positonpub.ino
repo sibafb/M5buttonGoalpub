@@ -3,7 +3,7 @@
 #include <std_msgs/Bool.h>
 #include <WiFi.h>
 
-const int BUTTUN_PIN = 21;
+const int BUTTON_PIN = 21;
 
 const char SSID[] = "TP-Link_FC5F_2.4G";
 const char PASSWORD[] = "05492952860";
@@ -38,7 +38,7 @@ class WiFiHardware {
 
 ros::NodeHandle_<WiFiHardware> nh;
 std_msgs::Bool buttton_pushed_msg;
-ros::Publisher pub_bottun_pushed("buttun_pushed", &buttton_pushed_msg);
+ros::Publisher pub_bottun_pushed("button_pushed", &buttton_pushed_msg);
 
 void setup() {
   Serial.begin(115200);
@@ -60,7 +60,7 @@ void setup() {
 
   Serial.println(" connected");
   M5.Lcd.print(" connected");
-  pinMode(BUTTUN_PIN, INPUT);
+  pinMode(BUTTON_PIN, INPUT);
 
   nh.initNode();
   nh.advertise(pub_bottun_pushed);
@@ -71,7 +71,7 @@ void setup() {
 
 void loop() {
 
-  if( digitalRead(BUTTUN_PIN) == HIGH ){
+  if( digitalRead(BUTTON_PIN) == HIGH ){
     if(buttton_pushed_msg.data == false){
       M5.Lcd.print(" pushed");
       pub_bottun_pushed.publish(&buttton_pushed_msg);
