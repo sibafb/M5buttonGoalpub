@@ -5,8 +5,8 @@
 
 const int BUTTON_PIN = 21;
 
-const char SSID[] = "TP-Link_FC5F_2.4G";
-const char PASSWORD[] = "05492952860";
+const char SSID[] = "";
+const char PASSWORD[] = "";
 IPAddress server(192,168,0,5);
 const uint16_t serverPort = 11411;
 
