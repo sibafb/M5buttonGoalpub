@@ -7,10 +7,10 @@ const int BUTTON_PIN = 21;
 
 const char SSID[] = "";
 const char PASSWORD[] = "";
-IPAddress server(192,168,0,5);
+IPAddress server(XXX,XXX,XXX,XXX);
 const uint16_t serverPort = 11411;
 
-IPAddress ip(192, 168, 0, 10);
+IPAddress ip(XXX,XXX,XXX,XXX);
 
 WiFiClient client;
 
